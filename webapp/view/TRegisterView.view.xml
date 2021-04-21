@@ -1,0 +1,51 @@
+<mvc:View
+    controllerName="trainingregister.controller.TRegisterView"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:u="sap.ui.unified"
+>
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+                        <VBox alignItems="Center" >
+                            <l:Grid class='sapUiSmallMarginTopBottom' defaultSpan="L12 M12 S12" width="300px">
+                                <l:content>
+                                    <FlexBox alignItems="Center" direction="Column" justifyContent="Center">
+                                        <items>
+                                            <core:Icon class='sapThemeBrand-asBackgroundColor sapThemeTextInverted-asColor registration-dialog-icon sapUiTinyMarginTopBottom'
+                                                src="sap-icon://edit"></core:Icon>
+                                        </items>
+                                        <Text class='registration-dialog-title sapUiTinyMarginTopBottom sapThemeLightText' text="{i18n>DIALOG_TITLE}" textAlign='center'></Text>
+                                    </FlexBox>
+                                    <Text class='sapThemeLightText sapUiSmallMarginTopBottom' text='{i18n>DIALOG_DESC}' visible ='{registrationDataModel>/requestSent}'></Text>
+                                    <l:FixFlex class="fixFlexVertical" visible='{registrationDataModel>/callback/showFields}'>
+                                        <l:fixContent>
+                                            <Input id="partner-registeration-form-firstnameInput" placeholder="{i18n>LABEL_FIRST_NAME}" type="Text"
+                                                value="{ path : 'registrationDataModel>/postData/candidateFirstName', type : 'sap.ui.model.type.String',constraints : { minLength: 1 } }"
+                                                valueStateText="{i18n>ERROR_FIELD_REQUIRED}"/>
+                                            <Input id="partner-registeration-form-lastnameInput" placeholder="{i18n>LABEL_LAST_NAME}" type="Text"
+                                                value="{ path : 'registrationDataModel>/postData/candidateLastName',type : 'sap.ui.model.type.String', constraints : { minLength: 1 } }"
+                                                valueStateText="{i18n>ERROR_FIELD_REQUIRED}"/>
+                                            <Input id="partner-registeration-form-emailInput" placeholder="{i18n>LABEL_EMAIL}" type="Email"
+                                                value="{ path : 'registrationDataModel>/postData/mail', type : '.typeEMail' }" valueStateText="{i18n>ERROR_NOT_VALID_EMAIL}"/>
+                                        </l:fixContent>
+                                    </l:FixFlex>
+                                </l:content>
+                            </l:Grid>
+                    
+                            <MessageStrip id="registrationMessageStrip" class="sapUiMediumMarginBottom" showIcon="false" text='{registrationDataModel>/callback/msg}'
+                                type='{registrationDataModel>/callback/status}' visible='{registrationDataModel>/callback/displayMessage}'></MessageStrip>
+
+                            <Button id="popupRegButton" press="register" text="{i18n>REGISTER_BUTTON}" visible='{registrationDataModel>/callback/showFields}' type="Emphasized"/>
+                        </VBox>
+                    </content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
